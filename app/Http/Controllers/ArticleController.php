@@ -14,7 +14,15 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        //
+        // retrieve all articles
+        $articles = Article::all();
+
+        // save response
+        $res["message"] = "Success";
+        $res["data"] = $articles;
+
+        // return response to json
+        return response()->json($res, 200);
     }
 
     /**
