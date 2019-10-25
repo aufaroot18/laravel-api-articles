@@ -71,7 +71,27 @@ class ArticleController extends Controller
      */
     public function show($id)
     {
-        //
+        // retrieve specified data
+        $article = Article::find($id);
+
+        // if article found
+        if($article) {
+            // save response
+            $res["message"] = "Success";
+            $res["data"] = $article;
+
+            // return response to json
+            return response()->json($res, 200);
+        }
+
+        // if article not found
+        else {
+            // save response;
+            $res["message"] = "Not found";
+
+            // return response to json
+            return response()->json($res, 404);
+        }
     }
 
     /**
