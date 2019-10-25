@@ -43,7 +43,24 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // validation input
+        $validateArticle = $request->validate([
+            "title" => "required",
+            "body" => "required"
+        ]);
+
+        // if validataion pass, insert article
+        $article = Article::create([
+            "title" => $request->title,
+            "body" => $request->body
+        ]);
+
+        // save response
+        $res["message"] = "Success";
+        $res["data"] = $article;
+
+        // return response to json
+        return response()->json($res, 201);
     }
 
     /**
