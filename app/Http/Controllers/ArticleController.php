@@ -114,7 +114,32 @@ class ArticleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // retrieve specified data
+        $article = Article::find($id);
+
+        // if article found
+        if($article) {
+            // update article
+            $article = Article::where('id', $id)->update([
+                "title" => $request->title,
+                "body" => $request->body
+            ]);
+
+            // save json
+            $res["message"] = "Success";
+
+            // return response json
+            return response()->json($res, 200);
+        }
+
+        // if article not found
+        else {
+            // save json
+            $res["message"] = "Not Found";
+
+            // return response json
+            return response()->json($res, 404);
+        }
     }
 
     /**
