@@ -150,6 +150,28 @@ class ArticleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // retrieve spesified data
+        $article = Article::find($id);
+
+        // if article found
+        if ($article) {
+            // delete article
+            $article->delete();
+
+            // save response
+            $res["message"] = "Success";
+
+            // return response to json
+            return response()->json($res, 200);
+        }
+
+        // if article not found
+        else {
+            // save response
+            $res["message"] = "Not Found";
+
+            // return response to json
+            return response()->json($res, 404);
+        }
     }
 }
